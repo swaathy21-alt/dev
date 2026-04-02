@@ -1,0 +1,25 @@
+<aside class="sidebar">
+  <div class="s-logo">
+    <span class="s-logo-txt">TTP Admin</span>
+    <span class="s-vbadge">v0.9</span>
+  </div>
+
+  <nav class="s-nav">
+    <ng-container *ngFor="let item of navItems">
+      <div *ngIf="!item" class="s-divider"></div>
+      <a *ngIf="item" class="s-item" [routerLink]="'/' + item.id" routerLinkActive="active">
+        <span class="s-icon">{{ item.icon }}</span>
+        <span class="s-lbl">{{ item.label }}</span>
+        <span *ngIf="item.badge" class="s-badge" [ngClass]="'badge-' + item.badgeClass">{{ item.badge }}</span>
+      </a>
+    </ng-container>
+  </nav>
+
+  <div class="s-footer">
+    <div class="avatar">SK</div>
+    <div>
+      <div class="s-uname">Swaathy Kamaraj</div>
+      <div class="s-urole">Admin</div>
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,50 @@
+<div class="fade-in">
+  <div class="page-header">
+    <div><div class="page-title">Dashboard</div><div class="page-subtitle">{{ date }}</div></div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card" *ngFor="let k of kpis" (click)="go(k.route)">
+      <div class="kval" [style.color]="k.color">{{ k.value }}</div>
+      <div class="klbl">{{ k.label }}</div>
+      <div class="ksub">{{ k.sub }}</div>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <strong style="font-size:14px">Recent API Failures</strong>
+        <button class="btn btn-ghost btn-sm" (click)="go('/failures')">View all</button>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Time</th><th>Vendor</th><th>Status</th><th>Error</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let f of recentFailures">
+            <td class="mono" style="font-size:11px">{{ f.timestamp.split(' ')[1] }}</td>
+            <td><strong>{{ f.vendor }}</strong></td>
+            <td><ttp-pill [variant]="pillClass(f.status)">{{ f.status }}</ttp-pill></td>
+            <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-muted)">{{ f.error }}</td>
+          </tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <strong style="font-size:14px">Open Queries</strong>
+        <button class="btn btn-ghost btn-sm" (click)="go('/queries')">View all</button>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Customer</th><th>Reason</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let q of openQueries">
+            <td>{{ q.customer }}</td>
+            <td>{{ q.reason }}</td>
+            <td><ttp-pill [variant]="queryPill(q.status)">{{ q.status }}</ttp-pill></td>
+          </tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div>

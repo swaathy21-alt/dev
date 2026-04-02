@@ -1,0 +1,7 @@
+.kpi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; }
+.kpi-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px; cursor:pointer; transition:box-shadow .15s;
+  &:hover { box-shadow:0 4px 16px rgba(50,0,190,.08); } }
+.kval { font-size:28px; font-weight:800; }
+.klbl { font-weight:600; font-size:13px; margin-top:2px; }
+.ksub { color:var(--text-faint); font-size:11px; margin-top:3px; }
+.dash-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }

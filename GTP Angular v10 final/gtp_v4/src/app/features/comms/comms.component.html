@@ -1,0 +1,27 @@
+<div class="fade-in">
+  <div class="page-title" style="margin-bottom:16px">Comms Dashboard</div>
+  <div class="card"><div class="table-wrap"><table>
+    <thead>
+      <tr>
+        <th style="min-width:190px">Event</th>
+        <th colspan="2" style="text-align:center;border-left:1px solid var(--topbar-border)">Samsung UK Online</th>
+        <th colspan="2" style="text-align:center;border-left:1px solid var(--topbar-border)">EE Retail UK</th>
+        <th colspan="2" style="text-align:center;border-left:1px solid var(--topbar-border)">EE Online Portal</th>
+      </tr>
+      <tr>
+        <th style="background:#F8F4FF"></th>
+        <th class="cth">Email</th><th class="cth">SMS</th>
+        <th class="cth">Email</th><th class="cth">SMS</th>
+        <th class="cth">Email</th><th class="cth">SMS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows">
+        <td style="font-weight:500">{{ row.ev }}</td>
+        <td *ngFor="let cell of row.cells" style="text-align:center">
+          <ttp-toggle [value]="cell" [readonly]="true"></ttp-toggle>
+        </td>
+      </tr>
+    </tbody>
+  </table></div></div>
+</div>

@@ -1,0 +1,55 @@
+<div class="fade-in">
+  <div class="page-header">
+    <div class="page-title">API Failures</div>
+    <button class="btn btn-ghost">&#8595; Export CSV</button>
+  </div>
+  <div class="card-sm">
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <select class="form-select" style="width:auto"><option>All Vendors</option></select>
+      <select class="form-select" style="width:auto"><option>All Methods</option></select>
+      <select class="form-select" style="width:auto"><option>All Accounts</option></select>
+      <input type="date" class="form-input" style="width:auto"/>
+    </div>
+  </div>
+  <div class="card">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Timestamp</th><th>Vendor</th><th>Endpoint / Method</th><th>Status</th><th>Error</th><th>Account</th><th></th></tr></thead>
+      <tbody>
+        <ng-container *ngFor="let f of failures">
+          <tr (click)="toggle(f.id)" style="cursor:pointer">
+            <td class="mono" style="font-size:11px">{{ f.timestamp }}</td>
+            <td><strong>{{ f.vendor }}</strong></td>
+            <td>
+              <span class="mono" style="font-size:11px">{{ f.endpoint }}</span>
+              <span style="background:#EDE8F8;color:var(--text-muted);font-size:10px;padding:1px 5px;border-radius:4px;margin-left:4px">{{ f.method }}</span>
+            </td>
+            <td><ttp-pill [variant]="pillVariant(f.status)">{{ f.status }}</ttp-pill></td>
+            <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-muted)">{{ f.error }}</td>
+            <td>{{ f.account }}</td>
+            <td style="text-align:center;color:var(--accent);font-size:15px">{{ isExpanded(f.id) ? '▾' : '▸' }}</td>
+          </tr>
+          <tr *ngIf="isExpanded(f.id)">
+            <td colspan="7" style="padding:0;border:none">
+              <div class="exp-panel fade-in">
+                <div class="exp-grid">
+                  <div>
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:6px">REQUEST PAYLOAD (PII Redacted)</div>
+                    <pre class="code-req">{{ reqJson(f) }}</pre>
+                  </div>
+                  <div>
+                    <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px">ERROR RESPONSE</div>
+                    <pre class="code-err">{{ errJson(f) }}</pre>
+                  </div>
+                </div>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-primary">&#8634; Retry Request</button>
+                  <button class="btn btn-ghost">View Account</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table></div>
+  </div>
+</div>

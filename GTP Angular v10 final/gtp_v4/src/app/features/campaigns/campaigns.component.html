@@ -1,0 +1,43 @@
+<div class="fade-in">
+  <div class="page-header">
+    <div class="page-title">Campaigns</div>
+    <button class="btn btn-primary">+ New Campaign</button>
+  </div>
+  <div class="card-sm"><div style="display:flex;gap:10px">
+    <select class="form-select" style="width:auto"><option>All Programs</option></select>
+    <select class="form-select" style="width:auto"><option>All Accounts</option></select>
+  </div></div>
+  <div class="card">
+    <div style="font-weight:700;font-size:14px;margin-bottom:12px">Promotions</div>
+    <div class="table-wrap" style="margin-bottom:24px"><table>
+      <thead><tr><th>Campaign Name</th><th>Type</th><th>Coupon Code</th><th>Start</th><th>End</th><th>Validation Basis</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let c of campaigns">
+          <td><strong>{{ c.name }}</strong></td>
+          <td><ttp-pill [variant]="typePill(c.type)">{{ c.type }}</ttp-pill></td>
+          <td>
+            <span *ngIf="c.coupon" class="coupon-chip">{{ c.coupon }}</span>
+            <span *ngIf="!c.coupon" style="color:var(--text-faint)">—</span>
+          </td>
+          <td>{{ c.start }}</td><td>{{ c.end }}</td><td>{{ c.basis }}</td>
+          <td><ttp-pill [variant]="statusPill(c.status)">{{ c.status }}</ttp-pill></td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div style="font-weight:700;font-size:14px;margin-bottom:12px">API Promotions</div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Source</th><th>External ID</th><th>Trade ID</th><th>Device</th><th>IMEI</th><th>Amount</th><th>Created</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let p of promos">
+          <td><ttp-pill variant="accent">{{ p.source }}</ttp-pill></td>
+          <td class="mono" style="color:var(--accent);font-size:11px">{{ p.externalId }}</td>
+          <td class="mono" style="font-size:11px">{{ p.tradeId }}</td>
+          <td>{{ p.device }}</td>
+          <td class="mono" style="font-size:11px;color:var(--text-muted)">{{ p.imei }}</td>
+          <td><strong style="color:var(--green)">{{ p.amount }}</strong></td>
+          <td style="color:var(--text-muted)">{{ p.created }}</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>

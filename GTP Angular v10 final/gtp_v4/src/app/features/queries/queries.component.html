@@ -1,0 +1,16 @@
+<div class="fade-in">
+  <div class="page-title" style="margin-bottom:16px">Open Queries</div>
+  <div class="card"><div class="table-wrap"><table>
+    <thead><tr><th>Account</th><th>Reason</th><th>Customer</th><th>Trade ID</th><th>Status</th><th>Created</th><th></th></tr></thead>
+    <tbody>
+      <tr *ngFor="let q of queries">
+        <td>{{ q.account }}</td><td>{{ q.reason }}</td>
+        <td><strong>{{ q.customer }}</strong></td>
+        <td class="mono" style="font-size:11px;color:var(--accent)">{{ q.tradeId }}</td>
+        <td><ttp-pill [variant]="pill(q.status)">{{ q.status }}</ttp-pill></td>
+        <td style="color:var(--text-muted)">{{ q.created }}</td>
+        <td><button class="btn btn-ghost btn-sm">Reply</button></td>
+      </tr>
+    </tbody>
+  </table></div></div>
+</div>

@@ -1,0 +1,37 @@
+<div class="fade-in">
+  <div class="page-header">
+    <div class="page-title">Accounts</div>
+    <button class="btn btn-primary">+ New Account</button>
+  </div>
+  <div class="card">
+    <div class="filter-bar">
+      <button class="filter-btn" [class.active]="filter==='all'"      (click)="setFilter('all')">All ({{ all.length }})</button>
+      <button class="filter-btn" [class.active]="filter==='active'"   (click)="setFilter('active')">Active ({{ activeCount }})</button>
+      <button class="filter-btn" [class.active]="filter==='inactive'" (click)="setFilter('inactive')">Inactive ({{ inactiveCount }})</button>
+      <input class="form-input" style="width:250px;margin-left:8px" placeholder="Search by account or program..." [(ngModel)]="search" (ngModelChange)="apply()"/>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>Program</th><th>Account Name</th><th>Channels</th><th>Equip Types</th>
+        <th>Shipping</th><th>Payment</th><th>IDV</th><th>BLK</th>
+        <th>Retail Users</th><th>Stores</th><th>Status</th><th></th>
+      </tr></thead>
+      <tbody>
+        <tr *ngFor="let a of filtered">
+          <td style="color:var(--text-muted)">{{ a.program }}</td>
+          <td><strong>{{ a.account }}</strong></td>
+          <td style="font-size:11px">{{ a.channels.join(', ') }}</td>
+          <td style="font-size:11px">{{ a.equipTypes.join(', ') }}</td>
+          <td style="font-size:11px">{{ a.shipping.join(', ') }}</td>
+          <td style="font-size:11px">{{ a.payment.join(', ') }}</td>
+          <td style="text-align:center" [style.color]="a.idv ? '#007A5E' : '#A090B8'">{{ a.idv ? '✓' : '—' }}</td>
+          <td style="text-align:center" [style.color]="a.blk ? '#007A5E' : '#A090B8'">{{ a.blk ? '✓' : '—' }}</td>
+          <td>{{ a.retailUsers }}</td>
+          <td>{{ a.stores }}</td>
+          <td><ttp-pill [variant]="statusPill(a.status)">{{ a.status }}</ttp-pill></td>
+          <td><button class="btn btn-ghost btn-sm">Clone</button></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>

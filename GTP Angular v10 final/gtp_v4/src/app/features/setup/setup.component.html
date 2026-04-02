@@ -1,0 +1,59 @@
+<div class="fade-in">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Guided Setup</div>
+      <div class="page-subtitle">Program → Account → Channel hierarchy</div>
+    </div>
+  </div>
+
+  <!-- Step bar with sub-labels -->
+  <div class="step-bar">
+    <div *ngFor="let s of steps; let i=index"
+         class="step-item" [ngClass]="stepClass(i)" (click)="goTo(i)">
+      <div class="si-num">
+        <span *ngIf="i < step" class="si-check">✓</span>
+        <span *ngIf="i >= step">{{i+1}}</span>
+      </div>
+      <div class="si-text">
+        <div class="si-name">{{s}}</div>
+        <div class="si-sub">{{stepSubs[i]}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Validation error banner -->
+  <div *ngIf="validationError" class="validation-banner">
+    <span class="vb-icon">⚠</span>
+    <span>{{validationError}}</span>
+    <button class="vb-close" (click)="validationError=''">✕</button>
+  </div>
+
+  <!-- Success state -->
+  <div *ngIf="submitted" class="submit-success">
+    <div class="ss-icon">✓</div>
+    <div class="ss-title">Account created successfully</div>
+    <div class="ss-desc">The account configuration has been submitted. Check the browser console for the full payload (replace with API call when backend is ready).</div>
+    <button class="btn btn-ghost" (click)="submitted=false;svc.goTo(4)">Back to Review</button>
+  </div>
+
+  <ng-container *ngIf="!submitted">
+  <app-step0 *ngIf="step===0"></app-step0>
+  <app-step1 *ngIf="step===1"></app-step1>
+  <app-step2 *ngIf="step===2"></app-step2>
+  <app-step3 *ngIf="step===3"></app-step3>
+  <app-step4 *ngIf="step===4"></app-step4>
+
+  </ng-container>
+
+  <div class="wizard-footer" *ngIf="!submitted">
+    <button class="btn btn-ghost" *ngIf="step > 0" (click)="back()">← Back</button>
+    <span *ngIf="step === 0"></span>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span class="step-counter">Step {{step+1}} of {{steps.length}}</span>
+      <button class="btn btn-primary" *ngIf="step < 4" (click)="next()">
+        {{step === 3 ? 'Review →' : 'Next →'}}
+      </button>
+      <button class="btn btn-primary" *ngIf="step === 4" (click)="createAccount()">✓ Create Account</button>
+    </div>
+  </div>
+</div>
